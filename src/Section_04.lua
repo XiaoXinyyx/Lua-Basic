@@ -27,7 +27,7 @@ until (i > 100)
 print(i);
 
 -- for 循环，分为数值循环和泛型循环
-for i = 0, 10, 2 do     -- 循环步长为2
+for i = 0, 10, 2 do     -- 数值循环
     print(i);
 end
 
