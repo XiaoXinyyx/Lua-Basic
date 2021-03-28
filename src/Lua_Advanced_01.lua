@@ -1,40 +1,38 @@
 ---
 --- Created by 杨以鑫. DateTime: 2021/3/27 12:24
---- 表的嵌套，函数默认参数，模块与包
+--- 函数进阶 上
+---     1. 函数参数的简化
+---     2. 可变参数（变长参数）
+---     3. 标准函数库
 ---
 
-local class = {Class = { Id = 1, Name = "Class A" }, Grade = 1};
-local stu = {Name = "Lilei", ClassInfo = class};      -- 表的嵌套
+--- 参数的简化
+function Func1(Name)
+    print("Set your name: " .. Name);
+end
+Func1 "YixinYang";         -- 实参为一个字符串构造式时可省略括号
 
--- 遍历表的内容并输出
-function table.ToString(tbl, prefix)
-    prefix = prefix or "";    -- 默认参数
-    for k, v in pairs(tbl) do
-        if type(v) == "table" then
-            print(prefix .. k .. ":\n" .. prefix .. "{");
-            table.ToString(v, prefix .. "   ");
-            print(prefix .. "}");
-        else
-            print(prefix .. k .. ": " .. v);
-        end
+function SetNameArray(NameArray)
+    for i, v in ipairs(NameArray) do
+        print(v);
     end
 end
+SetNameArray {1,2,3,4,5};   -- 实参为一个table构造式时可省略括号
 
--- 模块与包
-local module =  {};
-
-module.constant = "常量";
-
-function module.func1()
-    io.write("这是一个公有函数");
+--- 可变参数
+function MultiParaFun1(...)      -- "..." 为关键字，表示多个参数
+    for i, v in pairs({...}) do
+        print(v);
+    end
 end
+MultiParaFun1("章北海", "罗辑", "程心");
 
-local function func2()
-    print("这是一个私有函数");
+-- 使用局部table变量arg代替{...}表达式，#arg返回参数个数
+function MultiParaFun2(...)      -- "..." 为关键字，表示多个参数
+    print("输入参数个数：" .. #arg);
+    for i, v in ipairs(arg) do
+        print(i, v);
+    end
 end
+MultiParaFun2("章北海", "罗辑", "程心");
 
-function module.func3()
-    func2();
-end
-
-return module;

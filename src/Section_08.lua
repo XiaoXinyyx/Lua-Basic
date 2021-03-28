@@ -3,7 +3,7 @@
 ---
 
 -- 定义空表，相当于 OOP 编程中的类
-Person = {}
+local Person = {}
 
 -- 引入 this 变量，降低方法引用表字段的耦合性
 local this = Person;
